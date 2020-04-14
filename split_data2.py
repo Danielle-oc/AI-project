@@ -8,7 +8,7 @@ data = pd.read_csv('labs_demo_tags_16_17.csv')
 
 
 labels = data['tag']
-features = data.drop(['tag'], axis=1)
+features = data.drop(['tag', 'city', 'clinic'], axis=1)
 X_trainVal, X_test, y_trainVal, y_test = train_test_split(features, labels, test_size=0.25)
 X_train, X_val, y_train, y_val = train_test_split(X_trainVal, y_trainVal, test_size=0.2)
 
