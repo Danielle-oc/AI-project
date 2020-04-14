@@ -49,4 +49,6 @@ def normalization_handler(file_name):
     return normalized_data
 
 
-utils.save_to_csv(normalization_handler("train.csv"), "normalized_data_16_17.csv")
+utils.save_to_csv(normalization_handler("train.csv"), "normalized_train_data_16_17.csv")
+utils.save_to_csv(normalization_handler("test.csv"), "normalized_test_data_16_17.csv")
+utils.save_to_csv(normalization_handler("val.csv"), "normalized_val_data_16_17.csv")
