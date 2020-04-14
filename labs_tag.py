@@ -18,8 +18,6 @@ def get_expected_death_date(i, patient_dates):
     while patient_dates["patient num"][i] == patient_num:
         if(patient_dates["test date"][i] > max_date):
             max_date = patient_dates["test date"][i]
-        if(patient_dates["patient num"][i] == 2641974):
-            print("HI")
         i = i + 1
         if i == len(patient_dates["patient num"]):
             break
@@ -57,8 +55,12 @@ def add_tag(data):
     for i in range(len(data["patient num"])):
         data['tag'][i] = patient_tag[data["patient num"][i]]
     utils.save_to_csv(data, "labs_demo_tags_16_17.csv")
+    return data
 
 
-data = demo_merge()
-add_tag(data)
+def get_all_data_tagged():
+    data = demo_merge()
+    return add_tag(data)
 
+
+get_all_data_tagged()
