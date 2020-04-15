@@ -50,3 +50,6 @@ def check_corellation():
 
 for f1 in X_train_no_cat.keys():
     print(f1 + ' minimum value is ' + str(X_train_no_cat[f1].min()))
+
+for f1 in X_train_no_cat.keys():
+    if type(X_train[f1][1]) =
