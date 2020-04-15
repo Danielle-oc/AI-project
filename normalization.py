@@ -37,6 +37,11 @@ def normalization_handler(file_name):
         feature = standard_features[i]
         scaled_df = standart_scaler.fit_transform((numpy.array(data[feature])).reshape(-1, 1))
         scaled_df = pd.DataFrame(scaled_df)
+        for j in scaled_df[0]:
+            if j > 1:
+                print(feature)
+                scaled_df = minmax_scaler.fit_transform((numpy.array(data[feature])).reshape(-1, 1))
+                break
         normalized_data[feature] = scaled_df
 
     for i in range(len(minmax_features)):
@@ -49,4 +54,6 @@ def normalization_handler(file_name):
     return normalized_data
 
 
-utils.save_to_csv(normalization_handler("train.csv"), "normalized_data_16_17.csv")
+utils.save_to_csv(normalization_handler("train.csv"), "normalized_train_data_16_17.csv")
+utils.save_to_csv(normalization_handler("test.csv"), "normalized_test_data_16_17.csv")
+utils.save_to_csv(normalization_handler("val.csv"), "normalized_val_data_16_17.csv")
