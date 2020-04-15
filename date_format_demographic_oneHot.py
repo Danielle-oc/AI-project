@@ -1,6 +1,5 @@
 import pandas as pd
 import utils
-import numpy as np
 
 
 def format_date(file_name):
