@@ -9,7 +9,7 @@ def merged_final_data(imputated_data_file, binary_data_file):
     binary_data = pd.read_csv(binary_data_file)
     print('binary_data')
     print(binary_data.shape)
-    repeated_lables = ['tag', 'birth date', 'gender','death date', 'aliya date','AF','AR','AT','AZ','BG','BR','BY','CL','CZ','DE','DZ','EG','ER'	,'ET','FR','GE','GR','HU','IL','IN','IQ','IR','IT','JO','KZ','LT','LY','MA','MN','NL','PH','PL','RO','RU','SY','TN','TR','UA','US','UY','UZ','YE','YU','Z3','ZA','ZZ','Arabic Christian','Arabic Muslim','Christian','Jewish','else religion','clalit','leumit','macabi','mehuedet','no clinic','unkown clinic']
+    repeated_lables = ['tag', 'birth date', 'gender','death date', 'aliya date','AF','AR','AT','AZ','BG','BY','CZ','DE','DZ','EG','ET','GE','GR','HU','IL','IN','IQ','IR','JO','KZ','LY','MA','MN','PL','RO','RU','SY','TN','TR','UA','US','UY','UZ','YE','YU','Z3','ZA','ZZ','Arabic Christian','Arabic Muslim','Jewish','else religion','clalit','leumit','macabi','mehuedet','no clinic','unkown clinic']
     binary_data_clean = binary_data.drop(repeated_lables, axis=1)
     print('binary_data_clean')
     print(binary_data_clean.shape)
