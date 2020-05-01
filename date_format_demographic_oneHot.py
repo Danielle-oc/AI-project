@@ -45,12 +45,39 @@ def one_hot(data):
     return data
 
 
+# check which columns are in test or in val but not in train and delete them
+# check which columns are in train but not in test or val and add these columns with zeros
+def add_missing_cols(data_train, data_test, data_val):
+    # check which columns in test but not in train
+    test_no_train = list(set(data_test.columns) - set(data_train.columns))
+    # check which columns in val but not in train
+    val_no_train = list(set(data_val.columns) - set(data_train.columns))
+    # delete the columns we found from val and from test
+    for col in test_no_train:
+        data_test = data_test.drop(col, 1)
+    for col in val_no_train:
+        data_val = data_val.drop(col, 1)
+
+    # check which columns in train but not in val
+    train_no_val = list(set(data_train.columns) - set(data_val.columns))
+    # check which columns in train but not in test
+    train_no_test = list(set(data_train.columns) - set(data_test.columns))
+    # add those columns to val and test with zeroes
+    for col in train_no_test:
+        data_test[col] = 0
+    for col in train_no_val:
+        data_val[col] = 0
+
+    return data_test, data_val
+
+
 data = format_date("train.csv")
-data = one_hot(data)
-utils.save_to_csv(data, "train_organized.csv")
+data_train = one_hot(data)
 data = format_date("test.csv")
-data = one_hot(data)
-utils.save_to_csv(data, "test_organized.csv")
+data_test = one_hot(data)
 data = format_date("val.csv")
-data = one_hot(data)
-utils.save_to_csv(data, "val_organized.csv")
+data_val = one_hot(data)
+(data_test, data_val) = add_missing_cols(data_train, data_test, data_val)
+utils.save_to_csv(data_train, "train_organized.csv")
+utils.save_to_csv(data_test, "test_organized.csv")
+utils.save_to_csv(data_val, "val_organized.csv")
