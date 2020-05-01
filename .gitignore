@@ -1,2 +1,10 @@
 /venv/pyvenv.cfg
 .idea
+__pycache__/*
+normalized_data_16_17.csv
+test_prepared_data_16_17.csv
+train_prepared_data_16_17.csv
+val_prepared_data_16_17.csv
+train_imputation_binary.csv
+val_imputation_binary.csv
+test_imputation_binary.csv
