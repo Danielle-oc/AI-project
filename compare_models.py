@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import Perceptron
 import numpy as np
-from sklearn.metrics import f1_score, accuracy_score
+from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error
 from utils import save_to_csv_concat
 
 
@@ -58,3 +58,6 @@ for i, clf in enumerate(classifiers):
     print("clf ", clfs_names[i], " accuracy score is: ", accuracy)
 
     print("clf ", clfs_names[i], "total score is ", (f1+accuracy)/2)
+
+    mae = mean_absolute_error(y_val, predictions)
+    print("clf ", clfs_names[i], "MAE score is ", mae)
