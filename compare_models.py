@@ -10,28 +10,37 @@ from sklearn.linear_model import Perceptron
 import numpy as np
 from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error
 from utils import save_to_csv_concat
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
+
+
 
 
 clfs_names = [
+    'logistic regression',
+    'linear regression',
     'KNN',
-    # 'Decision tree',
-    # 'Random Forest',
+    'Decision tree',
+    'Random Forest',
     # 'SVM',
-    # 'MLP',
-    # 'Naive Bayes',
-    # 'Perceptron'
+    'MLP',
+    'Naive Bayes',
+    'Perceptron'
 ]
 
 
 classifiers = [
+    LogisticRegression(),
+    LinearRegression(),
     KNeighborsClassifier(algorithm='ball_tree', n_neighbors=3, p=1, weights='distance'),
-    # DecisionTreeClassifier(criterion='gini', min_samples_leaf=1, min_samples_split=5, splitter='best'),
-    # RandomForestClassifier(bootstrap=False, criterion='entropy', min_samples_leaf=1, min_samples_split=3,
-    #                        n_estimators=40),
+    DecisionTreeClassifier(criterion='gini', min_samples_leaf=1, min_samples_split=5, splitter='best'),
+    RandomForestClassifier(bootstrap=False, criterion='entropy', min_samples_leaf=1, min_samples_split=3,
+                           n_estimators=40),
     # SVC(C=100, gamma='auto', kernel='rbf'),
-    # MLPClassifier(activation='tanh', max_iter=400, solver='adam'),
-    # GaussianNB(),
-    # Perceptron(alpha=1e-05, penalty=None)
+    MLPClassifier(activation='tanh', max_iter=400, solver='adam'),
+    GaussianNB(),
+    Perceptron(alpha=1e-05, penalty=None)
 ]
 
 
@@ -49,15 +58,36 @@ for i, clf in enumerate(classifiers):
 
     clf.fit(X_train, y_train)
     predictions = clf.predict(X_val)
-    print(predictions[0], y_val[0])
+    # print(len(predictions))
+    # print(len(y_val))
+    # print(type(y_val))
+    # print(type(predictions))
+    y_val_copy = y_val.copy()
+    y_val_copy[y_val_copy <= 365] = 1
+    y_val_copy[y_val_copy > 365] = -1
+    # print(y_val_copy)
+    # print(y_val)
+    predictions_copy = predictions.copy()
+    predictions_copy[predictions_copy <= 365] = 1
+    predictions_copy[predictions_copy > 365] = -1
+    # print(predictions)
+    # print('###################')
+    # print(predictions_copy)
 
-    f1 = np.mean(f1_score(y_val, predictions, average='macro'))
+
+    # for k in range(len(predictions)):
+    #     print(k)
+    #     print(predictions_copy[k], y_val_copy[k])
+
+    f1 = np.mean(f1_score(y_val_copy, predictions_copy, average='macro'))
     print("clf ", clfs_names[i], " f1 score is: ", f1)
 
-    accuracy = np.mean(accuracy_score(y_val, predictions))
+    accuracy = np.mean(accuracy_score(y_val_copy, predictions_copy))
     print("clf ", clfs_names[i], " accuracy score is: ", accuracy)
 
     print("clf ", clfs_names[i], "total score is ", (f1+accuracy)/2)
 
     mae = mean_absolute_error(y_val, predictions)
     print("clf ", clfs_names[i], "MAE score is ", mae)
+    # mse = mean_squared_error(y_val_copy, predictions_copy)
+    # print("clf ", clfs_names[i], " mse score is: ", mse)
