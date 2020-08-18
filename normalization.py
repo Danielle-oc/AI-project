@@ -59,7 +59,6 @@ def normalization_handler(file_name):
         scaled_df = minmax_scaler.fit_transform((numpy.array(data[feature])).reshape(-1, 1))
         scaled_df = pd.DataFrame(scaled_df)
         normalized_data[feature] = scaled_df
-
     return normalized_data
 
 

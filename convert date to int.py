@@ -39,18 +39,4 @@ save_to_csv(val, "val_final_data_16_17.csv")
 
 
 
-#
-#
-# print(type(data['test date'][1]))
-# data['test date']= pd.to_datetime(data['test date'])
-# print(type(data['test date'][1]))
-#
-#
-# print(data['test date'].min())
-#
-# print('#########')
-# print( type( (data['test date'] - data['test date'].min()).dt.days)  )
-# data['test date'] = (data['test date'] - data['test date'].min()).dt.days
-# data['te'] = (data['test date'] - data['test date'].min()).dt.days
-#
-#
+
